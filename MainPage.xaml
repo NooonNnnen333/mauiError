@@ -1,0 +1,66 @@
+﻿    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel = "clr-namespace:MauiApp333.Mehanism"
+             x:DataType="viewmodel:System111"
+             x:Class="MauiApp1.MainPage">
+
+    <Grid RowDefinitions="350, 55, 19, *" 
+          ColumnDefinitions=".75*, .25*"
+          ColumnSpacing="25"
+          Padding="10"> <!-- Grib - структура для размещения объектов RowDefinitions — определяет строки разной высоты для элементов в сетке. ColumnDefinitions — определяет столбцы разной ширины. ColumnSpacing и Padding — это отступы между элементами и по краям сетки.-->
+
+        <Image Grid.ColumnSpan="2"
+               Source="S600xU_2x.webp"
+               WidthRequest="400"   
+               HeightRequest="300"/>   
+
+        <Entry Placeholder="Введите"
+               Text="{Binding Text}"
+               Grid.Row="1"/>   
+
+        <Button Text="Add"
+                Command="{Binding AddItemCommand}"
+                Grid.Row="1"
+                Grid.Column="1"/>
+        
+        <CollectionView Grid.Row="3" Grid.ColumnSpan="5" Margin="0, 15, 0, 0"
+                        ItemsSource="{Binding Items}"
+                        SelectionMode="None">
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem Text="Удалить"
+                                       BackgroundColor="Red"
+                                       Command = "{Binding Source = {RelativeSource AncestorType = {x:Type viewmodel:System111}}, Path=DeleteItemCommand }"
+                                       CommandParameter="{Binding .}" /> <!-- Тут Binding - привязать, Source - источник, 
+                                       RelativeSource - говорит,что необходим идти "вверх" по "дереву" кода, 
+                                       а AncestorType - указывает на конкретный объект, Path - указание на конкретную функцию, -->
+                            
+                        </SwipeView.RightItems>
+                            <Grid Padding="3">
+                               
+                                <Frame>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command = "{Binding Source = {RelativeSource AncestorType = {x:Type viewmodel:System111}}, Path=TapCommandCommand }"
+                                            CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding .}"
+                                           FontSize="19"/>
+                                </Frame>
+                            </Grid>
+                    </SwipeView>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        
+        
+        
+    </Grid>
+
+</ContentPage>

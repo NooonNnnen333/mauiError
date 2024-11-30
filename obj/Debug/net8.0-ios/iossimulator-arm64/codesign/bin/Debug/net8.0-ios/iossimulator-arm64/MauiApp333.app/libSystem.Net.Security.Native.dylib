@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - /Users/egorvasilev/RiderProjects/MauiApp1/MauiApp333/bin/Debug/net8.0-ios/iossimulator-arm64/MauiApp333.app/libSystem.Net.Security.Native.dylib
